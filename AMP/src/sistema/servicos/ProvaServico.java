@@ -15,24 +15,27 @@ import sistema.dados.ProvaDAO;
  * @author raiote
  */
 public class ProvaServico {
+
     ProvaDAO provaDAO;
-    
-    public ProvaServico(){
+
+    public ProvaServico() {
         provaDAO = new ProvaDAO();
     }
-    
-    public void cadastrarProva(Prova prova){
-        if(provaDAO.pesquisarPorCodigo(prova.getCodigoProva())==null){
-            provaDAO.gravarProva(prova);
+
+    public Prova cadastrarProva(String descricaoProva) {
+
+        if (provaDAO.pesquisarPorDescricao(descricaoProva) == null) {
+            return provaDAO.gravarProva(descricaoProva);
         }
+        return null;
     }
-    
-    public Prova pesquisarPorCodigo(String codigoProva){
+
+    public Prova pesquisarPorCodigo(String codigoProva) {
         return provaDAO.pesquisarPorCodigo(codigoProva);
     }
-    
-    public ArrayList<Exercicio> listarExercicios(Prova prova){
+
+    public ArrayList<Exercicio> listarExercicios(Prova prova) {
         return provaDAO.getExercicios(prova);
     }
-    
+
 }

@@ -9,6 +9,7 @@ package sistema.dados;
 import java.util.List;
 import sistema.model.Avaliacao;
 import sistema.model.Comissao;
+import sistema.model.Resolucao;
 
 /**
  *
@@ -20,11 +21,19 @@ public class AvaliacaoDAO {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public boolean pesquisarAvaliacao(Avaliacao avaliacao) {
+    public Avaliacao pesquisarAvaliacao(String codigo_resolucao, String codigo_comissao) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public void gravarAvaliacao(Avaliacao avaliacao) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<Avaliacao> listarPorResolucao(Resolucao resolucao) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void atualizarAvaliacao(Avaliacao avaliacao) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

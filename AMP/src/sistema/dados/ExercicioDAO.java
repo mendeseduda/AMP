@@ -9,7 +9,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import sistema.model.Exercicio;
+import sistema.model.Prova;
 
 /**
  *
@@ -19,15 +21,19 @@ public class ExercicioDAO {
 
     Connection conexao;
 
-    public void gravarExercicio(Exercicio exercicio) {
+    public Exercicio gravarExercicio(String descricaoExercicio, String codigoProva) {
         try {
             conexao = Conexao.abrir();
             String sql = "INSERT INTO Exercicio(Descricao_Exercicio, Codigo_Prova)VALUES(?,?)";
-            PreparedStatement ps = conexao.prepareStatement(sql);
-            ps.setString(1, exercicio.getDescricao());
-            ps.setString(2, exercicio.getProva().getCodigoProva());
-            ps.executeQuery();
-        
+            PreparedStatement ps = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, descricaoExercicio);
+            ps.setString(2, codigoProva);
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+            String id = rs.next() ? rs.getString("Codigo_Exercicio") : null;
+            return new Exercicio(id, descricaoExercicio, new Prova(codigoProva));
+
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
@@ -42,6 +48,14 @@ public class ExercicioDAO {
     }
 
     public void remover(Exercicio exercicio) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Exercicio pesquisarPorProva(String codigoProva) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Exercicio pesquisar(String descricaoExercicio, String codigoProva) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

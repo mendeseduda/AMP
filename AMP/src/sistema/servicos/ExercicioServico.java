@@ -15,30 +15,38 @@ import sistema.model.Exercicio;
 public class ExercicioServico {
 
     ExercicioDAO exercicioDAO;
-    
-    public ExercicioServico(){
+
+    public ExercicioServico() {
         exercicioDAO = new ExercicioDAO();
     }
-    
-    public void cadastrarExercicio(Exercicio exercicio) {
-        if(exercicioDAO.pesquisarPorCodigo(exercicio.getCodigo())==null){
-            exercicioDAO.gravarExercicio(exercicio);
+
+    public Exercicio cadastrarExercicio(String descricaoExercicio, String codigoProva) {
+        if (exercicioDAO.pesquisar(descricaoExercicio, codigoProva) == null) {
+            Exercicio retorno = exercicioDAO.gravarExercicio(descricaoExercicio, codigoProva);
+            if (retorno.getCodigo() != null) {
+                return retorno;
+            }
         }
+        return null;
     }
-    
-    public Exercicio pesquisarPorCodigo(String codigoExercicio){
+
+    public Exercicio pesquisarPorCodigo(String codigoExercicio) {
         return exercicioDAO.pesquisarPorCodigo(codigoExercicio);
-        
+
     }
-    
-    public void removerExercicio(Exercicio exercicio){
-        if(exercicioDAO.pesquisarPorCodigo(exercicio.getCodigo()) != null){
+
+    public Exercicio pesquisarPorProva(String codigoProva) {
+        return exercicioDAO.pesquisarPorProva(codigoProva);
+    }
+
+    public void removerExercicio(Exercicio exercicio) {
+        if (exercicioDAO.pesquisarPorCodigo(exercicio.getCodigo()) != null) {
             exercicioDAO.remover(exercicio);
         }
     }
-    
-    public void atualizarExercicio(Exercicio exercicio){
-        if(exercicioDAO.pesquisarPorCodigo(exercicio.getCodigo())!=null){
+
+    public void atualizarExercicio(Exercicio exercicio) {
+        if (exercicioDAO.pesquisarPorCodigo(exercicio.getCodigo()) != null) {
             exercicioDAO.atualizarExercicio(exercicio);
         }
     }
