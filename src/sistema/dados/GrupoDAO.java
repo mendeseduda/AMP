@@ -7,10 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import sistema.model.Grupo;
+import sistema.model.Tutor;
 
 public class GrupoDAO implements GrupoDAOInterface {
 
-    private static Connection conexao;
+    private Connection conexao;
 
     @Override
     public void cadastrarGrupo(Grupo grupo) {
@@ -41,20 +42,20 @@ public class GrupoDAO implements GrupoDAOInterface {
     public List<Grupo> listarGrupos() {
        List<Grupo> gruposEncontrados = new ArrayList<>();
 		conexao = Conexao.abrir(); 
-		String sql = "SELECT * FROM Grupo;";
+		String sql = "SELECT Codigo_Grupo, Grupo.Codigo_Tutor FROM Grupo INNER JOIN Tutor ON Grupo.Codigo_Tutor = Tutor.Codigo_Tutor;";
 		
 		try{
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()){
-				Grupo grupo = new Grupo(rs.getInt("Codigo_Grupo"), rs.getString("userName"), null);
+				Grupo grupo = new Grupo(rs.getInt("Codigo_Grupo"),new Tutor(rs.getInt("Codigo_Tutor"),rs.getString("userName"),null), rs.getString("userName"), null);
 				gruposEncontrados.add(grupo);
 				
 			}
 			
 		}catch(SQLException e){
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 		
 		Conexao.fechar(conexao);
@@ -63,17 +64,63 @@ public class GrupoDAO implements GrupoDAOInterface {
 
     @Override
     public List<Grupo> listarPorId(int idGrupo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        List<Grupo> gruposEncontrados = new ArrayList<>();
+		conexao = Conexao.abrir(); 
+		String sql = "SELECT Codigo_Grupo, Grupo.Codigo_Tutor FROM Grupo INNER JOIN Tutor ON Grupo.Codigo_Tutor = Tutor.Codigo_Tutor WHERE Grupo.Codigo_Grupo LIKE (?);";
+		
+		try{
+			PreparedStatement ps = conexao.prepareStatement(sql);
+                        ps.setString(1,"%" + idGrupo + "%");
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				Grupo grupo = new Grupo(rs.getInt("Codigo_Grupo"),new Tutor(rs.getInt("Codigo_Tutor"),rs.getString("userName"),null), rs.getString("userName"), null);
+				gruposEncontrados.add(grupo);
+				
+			}
+			
+		}catch(SQLException e){
+			throw new RuntimeException(e);
+		}
+		
+		Conexao.fechar(conexao);
+		return gruposEncontrados;
+	}
 
     @Override
     public void atualizarGrupo(Grupo grupo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (!VerificarDAO.validarCadastro(grupo)) {
+             conexao = Conexao.abrir();
+        String sql = "UPDATE Grupo SET Codigo_Tutor WHERE Codigo_Grupo = ?";
+
+        try {
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, grupo.getTutor().getIdTutor());
+            ps.setInt(2, grupo.getIdGrupo());
+            
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        Conexao.fechar(conexao);
     }
+        }
+    
 
     @Override
     public void deletarGrupo(int idGrupo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       conexao = Conexao.abrir();
+        String sql = "DELETE Grupo FROM Grupo WHERE Codigo_Grupo = ?";
+
+        try {
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, idGrupo);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

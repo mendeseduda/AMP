@@ -1,14 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sistema.dados;
 
-/**
- *
- * @author PEDRO
- */
+import java.util.List;
+import sistema.model.Exercicio;
+
 public interface ExercicioDAOInterface {
+    public void inserirExercicio(Exercicio exercicio);
+    public void atualizarExercicio(Exercicio exercicio);
+    public void remover(Exercicio exercicio);
+    public List<Exercicio> pesquisarPorCodigo(int codigo);
+    public List<Exercicio> pesquisarExercicios();
     
 }
