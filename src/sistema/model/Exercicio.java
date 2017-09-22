@@ -42,4 +42,14 @@ public class Exercicio {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public String getNomeArquivo() {
+        return nomeArquivo;
+    }
+
+    public void setNomeArquivo(String nomeArquivo) {
+        this.nomeArquivo = nomeArquivo;
+    }
+    
+    
 }
