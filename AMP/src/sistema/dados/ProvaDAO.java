@@ -17,7 +17,7 @@ public class ProvaDAO implements ProvaDAOInterface {
     private Connection conexao;
     
     @Override
-   public Prova inserirProva(Prova prova) {
+   public void inserirProva(Prova prova) {
         if (!VerificarDAO.validarProva(prova)) {
                 conexao = Conexao.abrir();
                 String sql = "INSERT INTO Prova VALUES(?,?,?);";
@@ -34,7 +34,6 @@ public class ProvaDAO implements ProvaDAOInterface {
     
         }
         Conexao.fechar(conexao);
-        return prova;
    }
     @Override
     public List<Prova> listarProvas() {
