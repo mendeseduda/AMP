@@ -1,36 +1,35 @@
 package sistema.model;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Prova {
 
-    private String codigoProva;
-    private String descricaoProva;
+    private int idProva;
+    private File cadernoProva;
     private List<Exercicio> exercicios;
 
-    public Prova(String codigoProva, String descricaoProva) {
-        this.codigoProva = codigoProva;
-        this.descricaoProva = descricaoProva;
-        exercicios = new ArrayList<>();
-    }
-
-    public Prova(String codigoProva) {
-        this.codigoProva = codigoProva;
+    public Prova(int idProva, File cadernoProva) {
+        this.idProva = idProva;
+        this.cadernoProva = cadernoProva;
         this.exercicios = new ArrayList<>();
     }
 
-    
-    public String getCodigoProva() {
-        return codigoProva;
+    public int getIdProva() {
+        return idProva;
     }
 
-    public void setCodigoProva(String codigoProva) {
-        this.codigoProva = codigoProva;
+    public void setIdProva(int idProva) {
+        this.idProva = idProva;
     }
 
-    public void addExercicio(Exercicio exercicio) {
-        exercicios.add(exercicio);
+    public File getCadernoProva() {
+        return cadernoProva;
+    }
+
+    public void setCadernoProva(File cadernoProva) {
+        this.cadernoProva = cadernoProva;
     }
 
     public List<Exercicio> getExercicios() {
@@ -41,4 +40,6 @@ public class Prova {
         this.exercicios = exercicios;
     }
 
+    
+    
 }

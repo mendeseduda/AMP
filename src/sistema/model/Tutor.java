@@ -14,11 +14,17 @@ import java.util.List;
  */
 public class Tutor extends Logavel {
 
+    private final int idTutor;
     private List<Grupo> gruposTutorados;
 
-    public Tutor(String userName, String senha) {
+    public Tutor(int idTutor, String userName, String senha) {
         super(userName, senha);
+        this.idTutor = idTutor;
         gruposTutorados = new ArrayList<>();
+    }
+
+    public int getIdTutor() {
+        return idTutor;
     }
 
     public void addGrupoTutorado(Grupo grupo) {

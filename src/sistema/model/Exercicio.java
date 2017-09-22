@@ -50,6 +50,5 @@ public class Exercicio {
     public void setNomeArquivo(String nomeArquivo) {
         this.nomeArquivo = nomeArquivo;
     }
-    
-    
+
 }
