@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sistema.servicos;
 
+import java.util.List;
 import sistema.dados.GrupoDAO;
 import sistema.model.Grupo;
 import sistema.model.Tutor;
@@ -12,19 +8,55 @@ import sistema.model.Tutor;
 public class GrupoServico implements GrupoServicoInterface {
 
     @Override
-    public void cadastrar(String userName, String senha, Tutor tutor) {
+    public void cadastrar(int id, String userName, String senha, Tutor tutor) {
         try {
-            GrupoDAO.cadastrarGrupo(new Grupo(tutor, userName, senha));
+            new GrupoDAO().cadastrarGrupo(new Grupo(id, tutor, userName, senha));
         } catch (Exception e) {
         }
     }
 
     @Override
-    public boolean Logar(Grupo grupo) {
+    public boolean logar(Grupo grupo) {
         try {
-        return GrupoDAO.logar(grupo);
+            return new GrupoDAO().logarGrupo(grupo);
         } catch (Exception e) {
-            throw  new RuntimeException(e);
+            throw new RuntimeException(e);
+        }
+    }
+    
+    @Override
+    public void atualizarGrupo(Grupo grupo) {
+        try {
+            new GrupoDAO().atualizarGrupo(grupo);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    @Override
+    public void deletarGrupo(Grupo grupo){
+        try {
+            new GrupoDAO().deletarGrupo(grupo.getIdGrupo());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    @Override
+    public List<Grupo> listarGrupos() {
+        try {
+            return new GrupoDAO().listarGrupos();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    @Override
+    public List<Grupo> listarPorId(int id) {
+        try {
+            return new GrupoDAO().listarPorId(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

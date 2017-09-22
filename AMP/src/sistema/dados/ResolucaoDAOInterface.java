@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sistema.servicos;
+package sistema.dados;
 
 /**
  *
- * @author Roberto Bolgheroni
+ * @author PEDRO
  */
-public class MaratonaServico {
-
+public interface ResolucaoDAOInterface {
+    
 }

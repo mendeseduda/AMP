@@ -1,23 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sistema.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Gay
- */
-public class Comissao extends Logavel{
-    private List<Avaliacao> resolucoesAvaliadas;    
+public class Comissao extends Logavel {
 
-    public Comissao(String userName, String senha) {
+    private final int idComissao;
+    private List<Avaliacao> resolucoesAvaliadas;     //atributo que reune todos as resolucoes que este comissario
+
+    public Comissao(int idComissao, String userName, String senha) {
         super(userName, senha);
-        resolucoesAvaliadas = new ArrayList<>();
+        this.idComissao = idComissao;
     }
 
     public List<Avaliacao> getResolucoesAvaliadas() {
@@ -27,9 +19,13 @@ public class Comissao extends Logavel{
     public void setResolucoesAvaliadas(List<Avaliacao> resolucoesAvaliadas) {
         this.resolucoesAvaliadas = resolucoesAvaliadas;
     }
-    
-    public void addResolucaoAvaliada(Avaliacao resolucaoAvaliada){
+
+    public void addResolucaoAvaliada(Avaliacao resolucaoAvaliada) {
         resolucoesAvaliadas.add(resolucaoAvaliada);
+    }
+
+    public int getIdComissao() {
+        return idComissao;
     }
 
     public String getUserName() {
@@ -52,8 +48,5 @@ public class Comissao extends Logavel{
     public String toString() {
         return "Comissao";
     }
-
-    
-    
 
 }
