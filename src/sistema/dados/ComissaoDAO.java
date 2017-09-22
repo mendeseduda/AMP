@@ -17,10 +17,12 @@ public class ComissaoDAO implements ComissaoDAOInterface{
     public  void cadastrarComissao(Comissao comissao) {
         if (!VerificarDAO.validarCadastro(comissao)) {
                 conexao = Conexao.abrir();
-                String sql = "INSERT INTO Comissao VALUES(?);";
+                String sql = "INSERT INTO Comissao VALUES(?,?,?);";
             try {
                 PreparedStatement ps = conexao.prepareStatement(sql);
                 ps.setInt(1,comissao.getIdComissao());
+                ps.setString(2,comissao.getUserName());
+                ps.setString(3,comissao.getSenha());
                 ps.executeUpdate();
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);

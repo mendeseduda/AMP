@@ -26,7 +26,7 @@ public class ExercicioDAO implements ExercicioDAOInterface {
                 int id = 0;
                 conexao = Conexao.abrir();
                 String sql = "INSERT INTO Exercicio VALUES(DEFAULT, ?, ?)";
-                PreparedStatement ps = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement ps = conexao.prepareStatement(sql);
                 ps.setString(1, exercicio.getNome());
                 ps.setInt(2, exercicio.getProva().getIdProva());
                 ps.executeUpdate();

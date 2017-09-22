@@ -17,11 +17,13 @@ public class GrupoDAO implements GrupoDAOInterface {
     public void cadastrarGrupo(Grupo grupo) {
         if (!VerificarDAO.validarCadastro(grupo)) {
                 conexao = Conexao.abrir();
-                String sql = "INSERT INTO Grupo VALUES(?,?);";
+                String sql = "INSERT INTO Grupo VALUES(?,?,?,?);";
             try {
                 PreparedStatement ps = conexao.prepareStatement(sql);
                 ps.setInt(1,grupo.getIdGrupo());
                 ps.setInt(2,grupo.getTutor().getIdTutor());
+                ps.setString(3,grupo.getUserName());
+                ps.setString(4,grupo.getSenha());
                 ps.executeUpdate();
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
@@ -30,7 +32,7 @@ public class GrupoDAO implements GrupoDAOInterface {
         }
     }
 
-    public static boolean logarGrupo(Grupo login) {
+    public boolean logarGrupo(Grupo login) {
         try {
             return VerificarDAO.validarLogin(login);
         } catch (Exception e) {
@@ -91,12 +93,14 @@ public class GrupoDAO implements GrupoDAOInterface {
     public void atualizarGrupo(Grupo grupo) {
         if (!VerificarDAO.validarCadastro(grupo)) {
              conexao = Conexao.abrir();
-        String sql = "UPDATE Grupo SET Codigo_Tutor WHERE Codigo_Grupo = ?";
+        String sql = "UPDATE Grupo SET Codigo_Tutor = ?, userName = ?, senha = ?WHERE Codigo_Grupo = ?";
 
         try {
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setInt(1, grupo.getTutor().getIdTutor());
-            ps.setInt(2, grupo.getIdGrupo());
+            ps.setString(2, grupo.getUserName());
+            ps.setString(3, grupo.getSenha());
+            ps.setInt(4, grupo.getIdGrupo());
             
             ps.executeUpdate();
 
