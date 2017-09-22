@@ -20,9 +20,8 @@ import sistema.model.Logavel;
 public class VerificarDAO {
 
     public static boolean validarCadastro(Logavel login) {
-        String tabela = login.toString();
         try {
-            String sql = "SELECT userName FROM " + tabela + " WHERE ? = username";
+            String sql = "SELECT username FROM "+login.toString()+" WHERE ? = username";
             PreparedStatement ps = Conexao.abrir().prepareStatement(sql);
             ps.setString(1, login.getUserName());
             ResultSet rs = ps.executeQuery();
@@ -31,4 +30,23 @@ public class VerificarDAO {
             throw new RuntimeException(ex);
         }
     }
+
+    public static boolean validarPassword(Logavel login) {
+        try {
+            String sql = "SELECT username FROM "+login.toString()+" WHERE ? = username AND ? = password";
+            PreparedStatement ps = Conexao.abrir().prepareStatement(sql);
+            ps.setString(1, login.getUserName());
+            ps.setString(2, login.getSenha());
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        
+    }
+
+    public static String validarTipo(String tipo) {
+        return new String();
+    }
+
 }

@@ -13,7 +13,7 @@ import java.util.List;
  * @author Gay
  */
 public class Comissao extends Logavel{
-    private List<Avaliacao> resolucoesAvaliadas;    
+    private List<Avaliacao> resolucoesAvaliadas;     //atributo que reune todos as resolucoes que este comissario
 
     public Comissao(String userName, String senha) {
         super(userName, senha);

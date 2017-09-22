@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Resolucao {
 
-    private int codigoResolucao; // numero da resolucao no sistema
+    private String codigoResolucao; // numero da resolucao no sistema
     private Exercicio exercicio; //exercicio ao qual se propoe a resolver
     private Grupo grupo; // grupo desenvolvedor
     private String resolucao; // texto da resolucao - codigo - em si
@@ -26,13 +26,15 @@ public class Resolucao {
         pontuacoes = new ArrayList<>();
     }
 
-    public int getCodigo() {
+    public String getCodigoResolucao() {
         return codigoResolucao;
     }
 
-    public void setCodigo(int codigoResolucao) {
+    public void setCodigoResolucao(String codigoResolucao) {
         this.codigoResolucao = codigoResolucao;
     }
+
+ 
 
     public void addPontuacao(int pontuacao) {
         pontuacoes.add(pontuacao);

@@ -32,6 +32,8 @@ public class GrupoDAO {
         }     
     }
     
+    
+    
     public static boolean logar(Grupo login){
         String tabela = login.toString();
         try {
