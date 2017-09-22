@@ -14,25 +14,25 @@ public class AvaliacaoServico implements AvaliacaoServicoInterface {
 
     @Override
     public List<Avaliacao> listarPorComissao(Comissao comissao) {
-        return AvaliacaoDAO.listarPorComissao(comissao);
+        return new AvaliacaoDAO().listarPorComissao(comissao);
     }
 
     @Override
     public List<Avaliacao> listarPorResolucao(Resolucao resolucao) {
-        return AvaliacaoDAO.listarPorResolucao(resolucao);
+        return new AvaliacaoDAO().listarPorResolucao(resolucao);
     }
 
     @Override
     public void adicionarAvaliacao(Avaliacao avaliacao) {
-        if (null == AvaliacaoDAO.pesquisarAvaliacao(avaliacao.getResolucao().getCodigoResolucao(), avaliacao.getAvaliador_Resolucao().getUserName())) {
-            AvaliacaoDAO.gravarAvaliacao(avaliacao);
+        if (null == new AvaliacaoDAO().pesquisarAvaliacao(avaliacao.getResolucao().getCodigoResolucao(), avaliacao.getAvaliador_Resolucao().getUserName())) {
+            new AvaliacaoDAO().gravarAvaliacao(avaliacao);
         }
     }
 
     @Override
     public void atualizarAvaliacao(Avaliacao avaliacao) {
-        if (null == AvaliacaoDAO.pesquisarAvaliacao(avaliacao.getResolucao().getCodigoResolucao(), avaliacao.getAvaliador_Resolucao().getUserName())) {
-            AvaliacaoDAO.atualizarAvaliacao(avaliacao);
+        if (null == new AvaliacaoDAO().pesquisarAvaliacao(avaliacao.getResolucao().getCodigoResolucao(), avaliacao.getAvaliador_Resolucao().getUserName())) {
+            new AvaliacaoDAO().atualizarAvaliacao(avaliacao);
         }
     }
 }

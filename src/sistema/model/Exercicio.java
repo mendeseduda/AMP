@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sistema.model;
 
 /**
@@ -11,25 +10,18 @@ package sistema.model;
  * @author Roberto Bolgheroni
  */
 public class Exercicio {
-    private String codigo; // codigo do exercicio no sistema
-    private String descricao; // descricao do exercicio, que sera, posteriormente, exibida na tela
+
+    private final int idExercicio; // codigo do exercicio no sistema
+    private String nome;
+    private String nomeArquivo;
     private Prova prova;
 
-    public Exercicio(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public Exercicio(String codigo, String descricao) {
-        this.codigo = codigo;
-        this.descricao = descricao;
-    }
-
-    public Exercicio(String codigo, String descricao, Prova prova) {
-        this.codigo = codigo;
-        this.descricao = descricao;
+    public Exercicio(int idExercicio, String nome, String nomeArquivo, Prova prova) {
+        this.idExercicio = idExercicio;
+        this.nome = nome;
+        this.nomeArquivo = nomeArquivo;
         this.prova = prova;
     }
-    
 
     public Prova getProva() {
         return prova;
@@ -39,24 +31,15 @@ public class Exercicio {
         this.prova = prova;
     }
 
-    
-    
-    public String getCodigo() {
-        return codigo;
+    public int getIdExercicio() {
+        return idExercicio;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public String getNome() {
+        return nome;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-    
-    
-    
 }

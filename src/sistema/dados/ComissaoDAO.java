@@ -7,7 +7,6 @@ package sistema.dados;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import sistema.model.Comissao;
@@ -18,9 +17,9 @@ import sistema.model.Comissao;
  */
 public class ComissaoDAO {
 
-    static Connection conexao;
+    Connection conexao;
 
-    public static void cadastrarComissao(Comissao comissao) {
+    public void cadastrarComissao(Comissao comissao) {
         if (!VerificarDAO.validarCadastro(comissao)) {
             try {
                 conexao = Conexao.abrir();
@@ -33,19 +32,19 @@ public class ComissaoDAO {
         }
     }
 
-    public static boolean logarComissao(Comissao login) {
+    public boolean logarComissao(Comissao login) {
         try {
             return VerificarDAO.validarLogin(login);
         } catch (Exception e) {
             throw  new RuntimeException(e);
         }
     }
-
+    
     public List<Comissao> listarComissao() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List<Comissao> listarPorUsername(String username) {
+    public List<Comissao> listarPorID(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

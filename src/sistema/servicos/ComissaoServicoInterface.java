@@ -10,5 +10,5 @@ package sistema.servicos;
  * @author Eduardo
  */
 public interface ComissaoServicoInterface {
-    public void cadastrar(String userName, String senha);
+    public void cadastrar(int id, String userName, String senha);
 }

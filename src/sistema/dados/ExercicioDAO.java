@@ -21,21 +21,21 @@ public class ExercicioDAO {
 
     Connection conexao;
 
-    public Exercicio gravarExercicio(String descricaoExercicio, String codigoProva) {
-        try {
-            conexao = Conexao.abrir();
-            String sql = "INSERT INTO Exercicio(Descricao_Exercicio, Codigo_Prova)VALUES(?,?)";
-            PreparedStatement ps = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, descricaoExercicio);
-            ps.setString(2, codigoProva);
-            ps.executeUpdate();
+    public void inserirExercicio(Exercicio exercicio) {
 
-            ResultSet rs = ps.getGeneratedKeys();
-            String id = rs.next() ? rs.getString("Codigo_Exercicio") : null;
-            return new Exercicio(id, descricaoExercicio, new Prova(codigoProva));
+        if (VerificarDAO.validarExercicio(exercicio)) {
+            try {
+                int id = 0;
+                conexao = Conexao.abrir();
+                String sql = "INSERT INTO Exercicio VALUES(DEFAULT, ?, ?)";
+                PreparedStatement ps = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ps.setString(1, exercicio.getNome());
+                ps.setString(2, exercicio.getProva().getCodigoProva());
+                ps.executeUpdate();
 
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 
@@ -52,10 +52,6 @@ public class ExercicioDAO {
     }
 
     public Exercicio pesquisarPorProva(String codigoProva) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public Exercicio pesquisar(String descricaoExercicio, String codigoProva) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -10,7 +10,6 @@ import java.util.List;
 import sistema.dados.AvaliacaoDAO;
 import sistema.dados.ComissaoDAO;
 import sistema.dados.ResolucaoDAO;
-import sistema.dados.VerificarDAO;
 import sistema.model.Avaliacao;
 import sistema.model.Comissao;
 import sistema.model.Resolucao;
@@ -21,35 +20,34 @@ import sistema.model.Resolucao;
  */
 public class ComissaoServico implements ComissaoServicoInterface {
 
-    private ComissaoDAO comissaoDAO;
-
     @Override
-    public void cadastrar(String userName, String senha) {
+    public void cadastrar(int id, String userName, String senha) {
         try {
-            ComissaoDAO.cadastrarComissao(new Comissao(userName, senha));
+            new ComissaoDAO().cadastrarComissao(new Comissao(id, userName, senha));
         } catch (Exception e) {
         }
     }
 
     public boolean Logar(Comissao comissao) {
         try {
-            return ComissaoDAO.logarComissao(comissao);
+            return new ComissaoDAO().logarComissao(comissao);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     public List<Comissao> listarComissao() {
-        return comissaoDAO.listarComissao();
+        return new ComissaoDAO().listarComissao();
     }
 
-    public List<Comissao> listarPorUsername(String username) {
-        return comissaoDAO.listarPorUsername(username);
+    public List<Comissao> listarPorId(int id) {
+        return new ComissaoDAO().listarPorId(id);
     }
 
     public void atualizarComissao(Comissao comissao) {
-        if (VerificarDAO.validarCadastro(comissao)) {
-            throw new UnsupportedOperationException();
+        try {
+            new ComissaoDAO().atualizarComissao(comissao);
+        } catch (Exception e) {
         }
     }
 
@@ -75,7 +73,7 @@ public class ComissaoServico implements ComissaoServicoInterface {
         AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO();
         List<Resolucao> resolucoesAvaliadas = new ArrayList<>();
 
-        for (Avaliacao avaliacao : avaliacaoDAO.listarPorComissao(comissao)) {
+        for (Avaliacao avaliacao : new AvaliacaoDAO().listarPorComissao(comissao)) {
             resolucoesAvaliadas.add(avaliacao.getResolucao());
         }
         return resolucoesAvaliadas;

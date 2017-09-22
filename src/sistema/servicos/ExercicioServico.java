@@ -7,6 +7,7 @@ package sistema.servicos;
 
 import sistema.dados.ExercicioDAO;
 import sistema.model.Exercicio;
+import sistema.model.Prova;
 
 /**
  *
@@ -14,40 +15,32 @@ import sistema.model.Exercicio;
  */
 public class ExercicioServico {
 
-    ExercicioDAO exercicioDAO;
-
-    public ExercicioServico() {
-        exercicioDAO = new ExercicioDAO();
-    }
-
-    public Exercicio cadastrarExercicio(String descricaoExercicio, String codigoProva) {
-        if (exercicioDAO.pesquisar(descricaoExercicio, codigoProva) == null) {
-            Exercicio retorno = exercicioDAO.gravarExercicio(descricaoExercicio, codigoProva);
-            if (retorno.getCodigo() != null) {
-                return retorno;
-            }
+    public void cadastrarExercicio(int id, String nome, String nomeArquivo, Prova prova) {
+        try {
+            new ExercicioDAO().inserirExercicio(new Exercicio(id, nome, nomeArquivo, prova));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
     public Exercicio pesquisarPorCodigo(String codigoExercicio) {
-        return exercicioDAO.pesquisarPorCodigo(codigoExercicio);
+        return new ExercicioDAO().pesquisarPorCodigo(codigoExercicio);
 
     }
 
     public Exercicio pesquisarPorProva(String codigoProva) {
-        return exercicioDAO.pesquisarPorProva(codigoProva);
+        return new ExercicioDAO().pesquisarPorProva(codigoProva);
     }
 
     public void removerExercicio(Exercicio exercicio) {
-        if (exercicioDAO.pesquisarPorCodigo(exercicio.getCodigo()) != null) {
-            exercicioDAO.remover(exercicio);
+        if (new ExercicioDAO().pesquisarPorCodigo(exercicio.getIdExercicio()) != 1) {
+            new ExercicioDAO().remover(exercicio);
         }
     }
 
     public void atualizarExercicio(Exercicio exercicio) {
-        if (exercicioDAO.pesquisarPorCodigo(exercicio.getCodigo()) != null) {
-            exercicioDAO.atualizarExercicio(exercicio);
+        if (new ExercicioDAO().pesquisarPorCodigo(exercicio.getIdExercicio()) != 1) {
+            new ExercicioDAO().atualizarExercicio(exercicio);
         }
     }
 }

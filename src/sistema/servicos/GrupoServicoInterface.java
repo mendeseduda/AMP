@@ -14,7 +14,7 @@ import sistema.model.Tutor;
  */
 public interface GrupoServicoInterface {
 
-    public void cadastrar(String userName, String password, Tutor tutor);
+    public void cadastrar(int id, String userName, String password, Tutor tutor);
 
     public boolean Logar(Grupo grupo);
 

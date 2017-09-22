@@ -7,7 +7,6 @@ package sistema.dados;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import sistema.model.Grupo;
 
@@ -17,9 +16,9 @@ import sistema.model.Grupo;
  */
 public class GrupoDAO {
 
-    private static Connection conexao;
+    private Connection conexao;
 
-    public static void cadastrarGrupo(Grupo grupo) {
+    public  void cadastrarGrupo(Grupo grupo) {
         if (!VerificarDAO.validarCadastro(grupo)) {
             try {
                 conexao = Conexao.abrir();
@@ -32,7 +31,7 @@ public class GrupoDAO {
         }
     }
 
-    public static boolean logarGrupo(Grupo login) {
+    public boolean logarGrupo(Grupo login) {
         try {
             return VerificarDAO.validarLogin(login);
         } catch (Exception e) {

@@ -17,23 +17,23 @@ import sistema.model.Resolucao;
  */
 public class AvaliacaoDAO {
 
-    public static List<Avaliacao> listarPorComissao(Comissao comissao) {
+    public List<Avaliacao> listarPorComissao(Comissao comissao) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public static Avaliacao pesquisarAvaliacao(String codigo_resolucao, String codigo_comissao) {
+    public Avaliacao pesquisarAvaliacao(String codigo_resolucao, String codigo_comissao) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public static void gravarAvaliacao(Avaliacao avaliacao) {
+    public void gravarAvaliacao(Avaliacao avaliacao) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public static List<Avaliacao> listarPorResolucao(Resolucao resolucao) {
+    public List<Avaliacao> listarPorResolucao(Resolucao resolucao) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public static void atualizarAvaliacao(Avaliacao avaliacao) {
+    public void atualizarAvaliacao(Avaliacao avaliacao) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

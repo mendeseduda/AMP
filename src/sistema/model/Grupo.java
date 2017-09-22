@@ -14,21 +14,15 @@ import java.util.List;
  */
 public class Grupo extends Logavel {
 
+    private final int idGrupo;
     private Tutor tutor;
-    private List<Integrante_Grupo> integrantes;
     private List<Resolucao> resolucao;
 
-    public Grupo(Tutor tutor, String userName, String senha) {
-        super(userName,  senha);
-        this.tutor = tutor;
-
-    }
-
-    public Grupo(String userName, String senha, Tutor tutor) {
+    public Grupo(int idGrupo, Tutor tutor, String userName, String senha) {
         super(userName, senha);
+        this.idGrupo = idGrupo;
         this.tutor = tutor;
-        integrantes = new ArrayList<>();
-        resolucao = new ArrayList<>();
+        this.resolucao = new ArrayList<>();
     }
 
     public Tutor getTutor() {
@@ -39,20 +33,16 @@ public class Grupo extends Logavel {
         this.tutor = tutor;
     }
 
-    public List<Integrante_Grupo> getIntegrantes() {
-        return integrantes;
-    }
-
-    public void setIntegrantes(List<Integrante_Grupo> integrantes) {
-        this.integrantes = integrantes;
-    }
-
     public List<Resolucao> getResolucao() {
         return resolucao;
     }
 
     public void setResolucao(List<Resolucao> resolucao) {
         this.resolucao = resolucao;
+    }
+
+    public int getIdGrupo() {
+        return idGrupo;
     }
 
     public String getUserName() {
@@ -75,7 +65,5 @@ public class Grupo extends Logavel {
     public String toString() {
         return "Grupo";
     }
-    
-    
 
 }
