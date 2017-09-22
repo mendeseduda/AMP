@@ -1,22 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sistema.servicos;
 
-import java.util.ArrayList;
-import sistema.model.Exercicio;
+import java.io.File;
+import java.util.List;
 import sistema.model.Prova;
 
-/**
- *
- * @author Eduardo
- */
 public interface ProvaServicoInterface {
-    public Prova cadastrarProva(String descricaoProva);
     
-    public Prova pesquisarPorCodigo(String codigoProva);
+    public void cadastrarProva(int id, String nomeProva, File file);
     
-    public ArrayList<Exercicio> listarExercicios(Prova prova);
+    public void atualizarProva(Prova prova);
+    
+    public void deletarProva(Prova prova);
+    
+    public List<Prova> pesquisarPorCodigo(int idProva);
+    
+    public List<Prova> listarProva();
 }

@@ -16,14 +16,15 @@ public class GrupoServico implements GrupoServicoInterface {
     }
 
     @Override
-    public boolean Logar(Grupo grupo) {
+    public boolean logar(Grupo grupo) {
         try {
             return new GrupoDAO().logarGrupo(grupo);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-
+    
+    @Override
     public void atualizarGrupo(Grupo grupo) {
         try {
             new GrupoDAO().atualizarGrupo(grupo);
@@ -31,7 +32,17 @@ public class GrupoServico implements GrupoServicoInterface {
             throw new RuntimeException(e);
         }
     }
-
+    
+    @Override
+    public void deletarGrupo(Grupo grupo){
+        try {
+            new GrupoDAO().deletarGrupo(grupo.getIdGrupo());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    @Override
     public List<Grupo> listarGrupos() {
         try {
             return new GrupoDAO().listarGrupos();
@@ -39,7 +50,8 @@ public class GrupoServico implements GrupoServicoInterface {
             throw new RuntimeException(e);
         }
     }
-
+    
+    @Override
     public List<Grupo> listarPorId(int id) {
         try {
             return new GrupoDAO().listarPorId(id);

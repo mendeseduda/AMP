@@ -1,21 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sistema.servicos;
 
+import java.util.List;
 import sistema.model.Grupo;
 import sistema.model.Tutor;
 
-/**
- *
- * @author Eduardo
- */
 public interface GrupoServicoInterface {
 
     public void cadastrar(int id, String userName, String password, Tutor tutor);
 
-    public boolean Logar(Grupo grupo);
+    public boolean logar(Grupo grupo);
+
+    public void atualizarGrupo(Grupo grupo);
+
+    public void deletarGrupo(Grupo grupo);
+
+    public List<Grupo> listarGrupos();
+
+    public List<Grupo> listarPorId(int id);
 
 }

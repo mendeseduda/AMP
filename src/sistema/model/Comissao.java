@@ -2,10 +2,6 @@ package sistema.model;
 
 import java.util.List;
 
-/**
- *
- * @author Gay
- */
 public class Comissao extends Logavel {
 
     private final int idComissao;
