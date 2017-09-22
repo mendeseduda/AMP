@@ -22,7 +22,7 @@ public class VerificarDAO {
     public static boolean validarCadastro(Logavel login) {
         String tabela = login.toString();
         try {
-            String sql = "SELECT username FROM " + tabela + " WHERE ? = username";
+            String sql = "SELECT userName FROM " + tabela + " WHERE ? = username";
             PreparedStatement ps = Conexao.abrir().prepareStatement(sql);
             ps.setString(1, login.getUserName());
             ResultSet rs = ps.executeQuery();
@@ -31,13 +31,4 @@ public class VerificarDAO {
             throw new RuntimeException(ex);
         }
     }
-
-    public static String validarPassword(String password) {
-        return new String();
-    }
-
-    public static String validarTipo(String tipo) {
-        return new String();
-    }
-
 }

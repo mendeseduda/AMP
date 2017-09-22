@@ -3,24 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sistema.servicos;
 
+import sistema.dados.GrupoDAO;
 import sistema.model.Grupo;
-import sistema.model.Maratona;
+import sistema.model.Tutor;
 
-
-public class GrupoServico implements LoginInterface {
+public class GrupoServico implements GrupoServicoInterface {
 
     @Override
-    public Login criarLogin(Maratona maratona, String username, String senha) {
-        
+    public void cadastrar(String userName, String senha, Tutor tutor) {
+        try {
+            GrupoDAO.cadastrarGrupo(new Grupo(tutor, userName, senha));
+        } catch (Exception e) {
+        }
     }
 
     @Override
-    public void logar(Grupo grupo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean Logar(Grupo grupo) {
+        try {
+        return GrupoDAO.logar(grupo);
+        } catch (Exception e) {
+            throw  new RuntimeException(e);
+        }
     }
-
 
 }
