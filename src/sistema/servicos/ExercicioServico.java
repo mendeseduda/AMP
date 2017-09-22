@@ -5,6 +5,7 @@
  */
 package sistema.servicos;
 
+import java.util.List;
 import sistema.dados.ExercicioDAO;
 import sistema.model.Exercicio;
 import sistema.model.Prova;
@@ -23,24 +24,27 @@ public class ExercicioServico {
         }
     }
 
-    public Exercicio pesquisarPorCodigo(String codigoExercicio) {
+    public List<Exercicio> listarPorCodigo(int codigoExercicio) {
         return new ExercicioDAO().pesquisarPorCodigo(codigoExercicio);
-
     }
 
-    public Exercicio pesquisarPorProva(String codigoProva) {
-        return new ExercicioDAO().pesquisarPorProva(codigoProva);
+    public List<Exercicio> listarExercicios(int codigoProva) {
+        return new ExercicioDAO().pesquisarExercicios();
     }
 
     public void removerExercicio(Exercicio exercicio) {
-        if (new ExercicioDAO().pesquisarPorCodigo(exercicio.getIdExercicio()) != 1) {
+        try {
             new ExercicioDAO().remover(exercicio);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
     public void atualizarExercicio(Exercicio exercicio) {
-        if (new ExercicioDAO().pesquisarPorCodigo(exercicio.getIdExercicio()) != 1) {
+        try {
             new ExercicioDAO().atualizarExercicio(exercicio);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }

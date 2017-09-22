@@ -7,11 +7,13 @@ import java.util.List;
 public class Prova {
 
     private int idProva;
+    private String nomeProva;
     private File cadernoProva;
     private List<Exercicio> exercicios;
 
-    public Prova(int idProva, File cadernoProva) {
+    public Prova(int idProva, String nomeProva, File cadernoProva) {
         this.idProva = idProva;
+        this.nomeProva = nomeProva;
         this.cadernoProva = cadernoProva;
         this.exercicios = new ArrayList<>();
     }
@@ -22,6 +24,14 @@ public class Prova {
 
     public void setIdProva(int idProva) {
         this.idProva = idProva;
+    }
+
+    public String getNomeProva() {
+        return nomeProva;
+    }
+
+    public void setNomeProva(String nomeProva) {
+        this.nomeProva = nomeProva;
     }
 
     public File getCadernoProva() {
@@ -40,6 +50,4 @@ public class Prova {
         this.exercicios = exercicios;
     }
 
-    
-    
 }

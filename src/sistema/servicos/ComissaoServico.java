@@ -5,14 +5,9 @@
  */
 package sistema.servicos;
 
-import java.util.ArrayList;
 import java.util.List;
-import sistema.dados.AvaliacaoDAO;
 import sistema.dados.ComissaoDAO;
-import sistema.dados.ResolucaoDAO;
-import sistema.model.Avaliacao;
 import sistema.model.Comissao;
-import sistema.model.Resolucao;
 
 /**
  *
@@ -48,35 +43,16 @@ public class ComissaoServico implements ComissaoServicoInterface {
         try {
             new ComissaoDAO().atualizarComissao(comissao);
         } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
-    public List<Resolucao> listarResolucoesPendentes(Comissao comissao) {
-        ResolucaoDAO resolucaoDAO = new ResolucaoDAO();
-        List<Resolucao> resolucoesPendentes = new ArrayList<>();
-        List<Resolucao> resolucoesAvaliadas = listarResolucoesAvaliadas(comissao);
-
-        //pra cada resolucao da lista total de resolucoes
-        for (Resolucao resolucao : resolucaoDAO.listarResolucoes()) {
-            //se a lista de resolucoes avaliadas pelo comissario definido nao conter a resolucao atual
-            if (!resolucoesAvaliadas.contains(resolucao)) {
-                //a lista de resolucoes pendentes recebe esta resolucao atual
-                resolucoesPendentes.add(resolucao);
-            }
+    public void deletarComissao(Comissao comissao) {
+        try {
+            new ComissaoDAO().deletarComissao(comissao.getIdComissao());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        //retorna a lista de resolucoes pendentes a serem avaliadas pelo comissario especifico
-        return resolucoesPendentes;
-
-    }
-
-    public List<Resolucao> listarResolucoesAvaliadas(Comissao comissao) {
-        AvaliacaoDAO avaliacaoDAO = new AvaliacaoDAO();
-        List<Resolucao> resolucoesAvaliadas = new ArrayList<>();
-
-        for (Avaliacao avaliacao : new AvaliacaoDAO().listarPorComissao(comissao)) {
-            resolucoesAvaliadas.add(avaliacao.getResolucao());
-        }
-        return resolucoesAvaliadas;
     }
 
 }

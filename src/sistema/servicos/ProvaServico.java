@@ -5,10 +5,10 @@
  */
 package sistema.servicos;
 
-import java.util.ArrayList;
-import sistema.model.Exercicio;
-import sistema.model.Prova;
+import java.io.File;
+import java.util.List;
 import sistema.dados.ProvaDAO;
+import sistema.model.Prova;
 
 /**
  *
@@ -16,26 +16,44 @@ import sistema.dados.ProvaDAO;
  */
 public class ProvaServico {
 
-    ProvaDAO provaDAO;
-
-    public ProvaServico() {
-        provaDAO = new ProvaDAO();
-    }
-
-    public Prova cadastrarProva(String descricaoProva) {
-
-        if (provaDAO.pesquisarPorDescricao(descricaoProva) == null) {
-            return provaDAO.gravarProva(descricaoProva);
+    public void cadastrarProva(int id, String nomeProva, File file) {
+        try {
+            new ProvaDAO().inserirProva(new Prova(id, nomeProva, file));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
-    public Prova pesquisarPorCodigo(String codigoProva) {
-        return provaDAO.pesquisarPorCodigo(codigoProva);
+    public void atualizarProva(Prova prova) {
+        try {
+            new ProvaDAO().atualizarProva(prova);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public ArrayList<Exercicio> listarExercicios(Prova prova) {
-        return provaDAO.getExercicios(prova);
+    public void deletarProva(Prova prova) {
+        try {
+            new ProvaDAO().deletarProva(prova.getIdProva());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void pesquisarPorCodigo(int idProva) {
+        try {
+            return new ProvaDAO().listarPorId(idProva);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Prova> listarProva() {
+        try {
+            return new ProvaDAO().ListarProvas();
+        } catch (Exception e) {
+        throw  new RuntimeException(e);
+        }
     }
 
 }

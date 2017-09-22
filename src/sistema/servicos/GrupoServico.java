@@ -18,25 +18,34 @@ public class GrupoServico implements GrupoServicoInterface {
     @Override
     public boolean Logar(Grupo grupo) {
         try {
-        return new GrupoDAO().logarGrupo(grupo);
+            return new GrupoDAO().logarGrupo(grupo);
         } catch (Exception e) {
-            throw  new RuntimeException(e);
+            throw new RuntimeException(e);
         }
     }
-    
-    public void atualizarGrupo(Grupo grupo){
+
+    public void atualizarGrupo(Grupo grupo) {
         try {
             new GrupoDAO().atualizarGrupo(grupo);
         } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
-    
-    public List<Grupo> listarGrupos(){
-        return new GrupoDAO().listarGrupos();
+
+    public List<Grupo> listarGrupos() {
+        try {
+            return new GrupoDAO().listarGrupos();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
-    
-    public List<Grupo> listarPorId(int id){
-        return new GrupoDAO().listarPorId(id);
+
+    public List<Grupo> listarPorId(int id) {
+        try {
+            return new GrupoDAO().listarPorId(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
