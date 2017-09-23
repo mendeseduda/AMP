@@ -9,7 +9,6 @@ import sistema.model.Exercicio;
 import sistema.model.Logavel;
 import sistema.model.Prova;
 
-
 public class VerificarDAO {
 
     static Connection conexao;
@@ -43,6 +42,7 @@ public class VerificarDAO {
 
     public static boolean validarExercicio(Exercicio exercicio) {
         try {
+            conexao = Conexao.abrir();
             String sql = "SELECT Nome_Exercicio FROM Exercicio WHERE Nome_Exercicio = ?";
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setString(1, exercicio.getNome());
@@ -52,17 +52,18 @@ public class VerificarDAO {
             throw new RuntimeException(e);
         }
     }
-    
+
     public static boolean validarProva(Prova prova) {
         try {
+            conexao = Conexao.abrir();
             String sql = "SELECT Codigo_Prova FROM Prova WHERE Codigo_Prova = ?";
             PreparedStatement ps = conexao.prepareStatement(sql);
-            ps.setInt(1, prova.getIdProva());
+            ps.setString(1, Integer.toString(prova.getIdProva()));
             ResultSet rs = ps.executeQuery();
             return rs.next();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    
+
 }

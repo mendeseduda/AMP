@@ -1,37 +1,43 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package sistema.model;
 
-public class Comissao extends Logavel {
+/**
+ *
+ * @author Roberto Bolgheroni
+ */
+public class Organizador extends Logavel {
 
-    private final int idComissao;
-
-    public Comissao(int idComissao, String userName, String senha) {
+    public Organizador(String userName, String senha) {
         super(userName, senha);
-        this.idComissao = idComissao;
     }
 
-    public int getIdComissao() {
-        return idComissao;
-    }
-
+    @Override
     public String getUserName() {
         return userName;
     }
 
+    @Override
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
+    @Override
     public String getSenha() {
         return senha;
     }
 
+    @Override
     public void setSenha(String senha) {
         this.senha = senha;
     }
 
     @Override
     public String toString() {
-        return "Comissao";
+        return "Organizador";
     }
-
+    
 }

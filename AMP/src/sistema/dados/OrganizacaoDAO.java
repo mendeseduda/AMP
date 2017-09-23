@@ -16,7 +16,7 @@ public class OrganizacaoDAO implements OrganizacaoDAOInterface {
     public void cadastrarOrganizador(Organizacao organizacao) {
        if (!VerificarDAO.validarCadastro(organizacao)) {
                 conexao = Conexao.abrir();
-                String sql = "INSERT INTO Grupo VALUES(?,?,?);";
+                String sql = "INSERT INTO Organizacao VALUES(?,?,?);";
             try {
                 PreparedStatement ps = conexao.prepareStatement(sql);
                 ps.setInt(1,organizacao.getIdOrganizacao());
@@ -43,14 +43,14 @@ public class OrganizacaoDAO implements OrganizacaoDAOInterface {
     public List<Organizacao> listarOrganizadores() {
         List<Organizacao> organizadoresEncontrados = new ArrayList<>();
 		conexao = Conexao.abrir(); 
-		String sql = "SELECT * FROM Comissao;";
+		String sql = "SELECT * FROM Organizacao;";
 		
 		try{
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()){
-				Organizacao organizacao = new Organizacao(rs.getInt("Codigo_Organizador"), rs.getString("userName"), null);
+				Organizacao organizacao = new Organizacao(rs.getInt("Codigo_Organizacao"), rs.getString("userName"), null);
 				organizadoresEncontrados.add(organizacao);
 				
 			}
@@ -74,7 +74,7 @@ public class OrganizacaoDAO implements OrganizacaoDAOInterface {
 			ResultSet rs = stmt.executeQuery();
 			
 			while(rs.next()){
-				Organizacao organizacao = new Organizacao(rs.getInt("Codigo_Organizador"), rs.getString("userName"), null);
+				Organizacao organizacao = new Organizacao(rs.getInt("Codigo_Organizacao"), rs.getString("userName"), null);
 				organizadoresEncontrados.add(organizacao);
 				
 			}
@@ -90,7 +90,7 @@ public class OrganizacaoDAO implements OrganizacaoDAOInterface {
     public void atualizarOrganizacao(Organizacao organizacao) {
      if (!VerificarDAO.validarCadastro(organizacao)) {
              conexao = Conexao.abrir();
-        String sql = "UPDATE Organizacao SET userName = ?, senha = ? WHERE Codigo_Organizador = ?";
+        String sql = "UPDATE Organizacao SET userName = ?, senha = ? WHERE Codigo_Organizacao = ?";
 
         try {
             PreparedStatement ps = conexao.prepareStatement(sql);
@@ -110,7 +110,7 @@ public class OrganizacaoDAO implements OrganizacaoDAOInterface {
     @Override
     public void deletarOrganizacao(int idOrganizacao) {
       conexao = Conexao.abrir();
-        String sql = "DELETE Organizacao FROM Organizacao WHERE Codigo_Organizador = ?";
+        String sql = "DELETE Organizacao FROM Organizacao WHERE Codigo_Organizacao = ?";
 
         try {
             PreparedStatement ps = conexao.prepareStatement(sql);

@@ -44,7 +44,7 @@ public class GrupoDAO implements GrupoDAOInterface {
     public List<Grupo> listarGrupos() {
        List<Grupo> gruposEncontrados = new ArrayList<>();
 		conexao = Conexao.abrir(); 
-		String sql = "SELECT Codigo_Grupo, Grupo.Codigo_Tutor FROM Grupo INNER JOIN Tutor ON Grupo.Codigo_Tutor = Tutor.Codigo_Tutor;";
+		String sql = "SELECT * FROM Grupo INNER JOIN Tutor ON Grupo.Codigo_Tutor = Tutor.Codigo_Tutor;";
 		
 		try{
 			PreparedStatement ps = conexao.prepareStatement(sql);
@@ -68,7 +68,7 @@ public class GrupoDAO implements GrupoDAOInterface {
     public List<Grupo> listarPorId(int idGrupo) {
         List<Grupo> gruposEncontrados = new ArrayList<>();
 		conexao = Conexao.abrir(); 
-		String sql = "SELECT Codigo_Grupo, Grupo.Codigo_Tutor FROM Grupo INNER JOIN Tutor ON Grupo.Codigo_Tutor = Tutor.Codigo_Tutor WHERE Grupo.Codigo_Grupo LIKE (?);";
+		String sql = "SELECT * FROM Grupo INNER JOIN Tutor ON Grupo.Codigo_Tutor = Tutor.Codigo_Tutor WHERE Grupo.Codigo_Grupo LIKE (?);";
 		
 		try{
 			PreparedStatement ps = conexao.prepareStatement(sql);

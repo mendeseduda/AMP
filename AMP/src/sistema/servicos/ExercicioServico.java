@@ -22,7 +22,7 @@ public class ExercicioServico implements ExercicioServicoInterface{
     }
 
     @Override
-    public List<Exercicio> listarExercicios(int codigoProva) {
+    public List<Exercicio> listarExercicios() {
         return new ExercicioDAO().pesquisarExercicios();
     }
 

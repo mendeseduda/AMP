@@ -11,6 +11,7 @@ public class ComissaoServico implements ComissaoServicoInterface {
         try {
             new ComissaoDAO().cadastrarComissao(new Comissao(id, userName, senha));
         } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
     @Override

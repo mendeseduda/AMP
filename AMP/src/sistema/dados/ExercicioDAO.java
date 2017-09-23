@@ -4,31 +4,25 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import sistema.model.Exercicio;
 import sistema.model.Prova;
 
-/**
- *
- * @author raiote
- */
 public class ExercicioDAO implements ExercicioDAOInterface {
 
     Connection conexao;
 
     @Override
     public void inserirExercicio(Exercicio exercicio) {
-
         if (!VerificarDAO.validarExercicio(exercicio)) {
             try {
-                int id = 0;
                 conexao = Conexao.abrir();
-                String sql = "INSERT INTO Exercicio VALUES(DEFAULT, ?, ?)";
+                String sql = "INSERT INTO Exercicio VALUES(DEFAULT, ?, ?, ?)";
                 PreparedStatement ps = conexao.prepareStatement(sql);
                 ps.setString(1, exercicio.getNome());
-                ps.setInt(2, exercicio.getProva().getIdProva());
+                ps.setString(2, exercicio.getNomeArquivo());
+                ps.setInt(3, exercicio.getProva().getIdProva());
                 ps.executeUpdate();
                 Conexao.fechar(conexao);
             } catch (SQLException ex) {
@@ -39,10 +33,10 @@ public class ExercicioDAO implements ExercicioDAOInterface {
 
     @Override
     public void atualizarExercicio(Exercicio exercicio) {
-        if (!VerificarDAO.validarExercicio(exercicio)) {
+        if (VerificarDAO.validarExercicio(exercicio)) {
             try {
                 conexao = Conexao.abrir();
-                String sql = "UPDATE Exercicio SET Nome_Exercicio = ?, NomeArquivo = ?, Codigo_Prova = ? WHERE Codigo_Exercicio = ?";
+                String sql = "UPDATE Exercicio SET Nome_Exercicio = ?, Nome_Arquivo = ?, Codigo_Prova = ? WHERE Codigo_Exercicio = ?";
                 PreparedStatement ps = conexao.prepareStatement(sql);
                 ps.setString(1, exercicio.getNome());
                 ps.setString(2, exercicio.getNomeArquivo());
@@ -58,14 +52,17 @@ public class ExercicioDAO implements ExercicioDAOInterface {
 
     @Override
     public void remover(Exercicio exercicio) {
-        conexao = Conexao.abrir();
-        String sql = "DELETE FROM Exercicio WHERE Codigo_Exercicio = ? OR Nome_Exercicio = ?";
-        try {
-            PreparedStatement ps = conexao.prepareStatement(sql);
-            ps.setInt(1, exercicio.getIdExercicio());
-            ps.setString(2, exercicio.getNome());
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex.getMessage());
+        if (VerificarDAO.validarExercicio(exercicio)) {
+            conexao = Conexao.abrir();
+            String sql = "DELETE FROM Exercicio WHERE Codigo_Exercicio = ?";
+            try {
+                PreparedStatement ps = conexao.prepareStatement(sql);
+                ps.setInt(1, exercicio.getIdExercicio());
+                ps.executeUpdate();
+                Conexao.fechar(conexao);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex.getMessage());
+            }
         }
     }
 

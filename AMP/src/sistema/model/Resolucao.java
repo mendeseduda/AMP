@@ -34,8 +34,6 @@ public class Resolucao {
         this.codigoResolucao = codigoResolucao;
     }
 
- 
-
     public void addPontuacao(int pontuacao) {
         pontuacoes.add(pontuacao);
     }

@@ -35,7 +35,7 @@ public class Organizacao extends Logavel {
 
     @Override
     public String toString() {
-        return "Organizador";
+        return "Organizacao";
     }
 
 }

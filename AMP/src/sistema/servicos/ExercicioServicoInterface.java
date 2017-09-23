@@ -10,7 +10,7 @@ public interface ExercicioServicoInterface {
 
     public List<Exercicio> listarPorCodigo(int codigoExercicio);
 
-    public List<Exercicio> listarExercicios(int codigoProva);
+    public List<Exercicio> listarExercicios();
 
     public void removerExercicio(Exercicio exercicio);
 
