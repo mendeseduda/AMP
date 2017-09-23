@@ -1,0 +1,46 @@
+CREATE SCHEMA IF NOT EXISTS AMP DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+
+USE AMP;
+
+CREATE TABLE IF NOT EXISTS Tutor(
+	Codigo_Tutor INT NOT NULL PRIMARY KEY,
+    userName VARCHAR(30) UNIQUE,
+    senha VARCHAR(30) 	
+);
+
+CREATE TABLE IF NOT EXISTS Grupo(
+	Codigo_Grupo INT NOT NULL PRIMARY KEY,
+	Codigo_Tutor INT NOT NULL,
+    userName VARCHAR(30) UNIQUE,
+    senha VARCHAR(30) ,
+    CONSTRAINT fk_grupo_tutor FOREIGN KEY(Codigo_Tutor) REFERENCES Tutor(Codigo_Tutor)
+);
+
+CREATE TABLE IF NOT EXISTS Comissao (
+    Codigo_Comissao INT NOT NULL PRIMARY KEY,
+    userName VARCHAR(30) UNIQUE,
+    senha VARCHAR(30)
+);
+
+CREATE TABLE IF NOT EXISTS Prova(
+	Codigo_Prova INT NOT NULL PRIMARY KEY,
+	Nome_Prova VARCHAR(30),
+    Caderno_Prova BLOB
+
+);
+
+CREATE TABLE IF NOT EXISTS Exercicio(
+	Codigo_Exercicio INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    Nome_Exercicio VARCHAR(30),
+    Nome_Arquivo VARCHAR(30),
+	Codigo_Prova INT NOT NULL,
+	CONSTRAINT fk_exercicio_prova FOREIGN KEY(Codigo_Prova) REFERENCES Prova (Codigo_Prova)
+);
+
+
+CREATE TABLE IF NOT EXISTS Organizacao(
+	Codigo_Organizacao INT NOT NULL PRIMARY KEY,
+    userName VARCHAR(30) UNIQUE,
+    senha VARCHAR(30) 
+);
+
